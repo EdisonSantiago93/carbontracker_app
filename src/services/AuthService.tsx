@@ -32,7 +32,7 @@ export const registerUserWithFirestore = async ({
   direccion,
   rol,
   password,
-}) => {
+}: any) => {
   try {
     // Crear usuario en Auth
     const userCredential = await createUserWithEmailAndPassword(
@@ -83,7 +83,7 @@ export const registerUserWithFirestore = async ({
 /**
  * Inicia sesión un usuario en Firebase
  */
-export const loginUser = async (email, password) => {
+export const loginUser = async (email:any, password:any) => {
   try {
     const userCredential = await signInWithEmailAndPassword(auth, email, password);
 
@@ -127,7 +127,7 @@ export const getUserData = async () => {
 /**
  * Actualiza los datos del perfil en Firestore
  */
-export const updateUserProfile = async (data) => {
+export const updateUserProfile = async (data:any) => {
   try {
     const user = auth.currentUser;
     if (!user) throw new Error("No hay usuario autenticado");
@@ -148,7 +148,7 @@ export const updateUserProfile = async (data) => {
 /**
  * Actualiza la contraseña del usuario (requiere contraseña actual)
  */
-export const updateUserPassword = async (currentPassword, newPassword) => {
+export const updateUserPassword = async (currentPassword:any, newPassword:any) => {
   try {
     const user = auth.currentUser;
     if (!user) throw new Error("No hay usuario autenticado");
@@ -166,7 +166,7 @@ export const updateUserPassword = async (currentPassword, newPassword) => {
     throw new Error(getFirebaseErrorMessage(error));
   }
 };
-export const resetUserPassword = async (email) => {
+export const resetUserPassword = async (email:any) => {
   try {
     if (!email) throw new Error("El correo es requerido");
     await sendPasswordResetEmail(auth, email.trim());

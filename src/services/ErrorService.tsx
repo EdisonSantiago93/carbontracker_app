@@ -1,6 +1,6 @@
 // src/services/ErrorService.js
 
-const errorMessages = {
+const errorMessages:any = {
   "auth/invalid-email": "El correo electrónico no es válido.",
   "auth/user-disabled": "Este usuario ha sido deshabilitado.",
   "auth/user-not-found": "No existe una cuenta con este correo.",
@@ -10,7 +10,7 @@ const errorMessages = {
   "auth/weak-password": "La contraseña es muy débil, usa al menos 6 caracteres.",
 };
 
-export const getFirebaseErrorMessage = (error) => {
+export const getFirebaseErrorMessage = (error:any) => {
 
   // Firebase a veces devuelve error.code o error.message
   const code = error.code || "";

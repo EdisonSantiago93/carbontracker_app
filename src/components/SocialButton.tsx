@@ -2,7 +2,15 @@ import React from "react";
 import { StyleSheet } from "react-native";
 import { Button } from "react-native-paper";
 
-export default function SocialButton({ label, icon, color, onPress, disabled }) {
+interface SocialButtonProps {
+  label: string;
+  icon: string;
+  color?: string;
+  onPress: () => void;
+  disabled?: boolean;
+}
+
+export default function SocialButton({ label, icon, color, onPress, disabled }: SocialButtonProps): JSX.Element {
   return (
     <Button
       mode="contained"

@@ -16,10 +16,10 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 const { width, height } = Dimensions.get("window");
 
-export default function OnboardingScreen({ navigation }) {
+export default function OnboardingScreen({ navigation }: { navigation: any }): JSX.Element {
   const insets = useSafeAreaInsets();
   const [page, setPage] = useState(0);
-  const [plans, setPlans] = useState([]);
+  const [plans, setPlans] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -42,7 +42,7 @@ export default function OnboardingScreen({ navigation }) {
     fetchPlans();
   }, []);
 
-  const renderCharacteristic = (item, index) => {
+  const renderCharacteristic = (item: any, index: number): JSX.Element => {
     let valorTexto = item.valor;
     let icono = "check-circle";
     let iconColor = "#65C879";
@@ -169,7 +169,7 @@ export default function OnboardingScreen({ navigation }) {
                   <Text style={styles.characteristicsTitle}>
                     ¿Qué incluye?
                   </Text>
-                  {plan.caracteristicas.map((item, index) =>
+                  {plan.caracteristicas.map((item: any, index: number) =>
                     renderCharacteristic(item, index)
                   )}
                 </View>
@@ -185,7 +185,7 @@ export default function OnboardingScreen({ navigation }) {
           {page + 1} de {plans.length}
         </Text>
         <View style={styles.dots}>
-          {plans.map((_, i) => (
+          {plans.map((_: any, i: number) => (
             <View
               key={i}
               style={[

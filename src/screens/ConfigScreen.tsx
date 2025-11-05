@@ -6,13 +6,13 @@ import AppContainer from "../components/AppContainer";
 import { MaterialIcons } from "@expo/vector-icons";
 import { removeSession } from "../utils/session";
 
-export default function ConfigScreen({ navigation }) {
-  const handleLogout = async () => {
+export default function ConfigScreen({ navigation }: { navigation: any }): JSX.Element {
+  const handleLogout = async (): Promise<void> => {
     await removeSession("user");
     navigation.replace("Login");
   };
 
-  const menus = [
+  const menus: { title: string; subtitle: string; icon: any; color: string; onPress: () => void; }[] = [
     {
       title: "Mi Perfil",
       subtitle: "Ver y editar información personal",
@@ -106,7 +106,7 @@ export default function ConfigScreen({ navigation }) {
           style={styles.logoutButton}
           contentStyle={styles.logoutButtonContent}
           labelStyle={styles.logoutButtonLabel}
-          icon={({ size, color }) => (
+          icon={({ size, color }: { size: number; color: string; }) => (
             <MaterialIcons name="logout" size={size} color={color} />
           )}
         >

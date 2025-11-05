@@ -1,10 +1,15 @@
-// src/components/AppContainer.js
+// src/components/AppContainer.tsx
 import React from "react";
 import { View, KeyboardAvoidingView, ScrollView, Platform, StyleSheet } from "react-native";
 import { useTheme } from "react-native-paper";
 import AppHeader from "./AppHeader";
 
-export default function AppContainer({ children, title }) {
+interface AppContainerProps {
+  children: React.ReactNode;
+  title?: string;
+}
+
+export default function AppContainer({ children, title }: AppContainerProps): JSX.Element {
   const theme = useTheme();
 
   return (

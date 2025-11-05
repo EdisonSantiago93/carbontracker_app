@@ -1,7 +1,7 @@
 import * as SecureStore from 'expo-secure-store';
 
 // Guardar un valor (objeto o string)
-export async function saveSession(key, value) {
+export async function saveSession(key: string, value: any) {
   try {
     const jsonValue = JSON.stringify(value);
     await SecureStore.setItemAsync(key, jsonValue);
@@ -11,7 +11,7 @@ export async function saveSession(key, value) {
 }
 
 // Leer un valor
-export async function getSession(key) {
+export async function getSession(key: string) {
   try {
     const value = await SecureStore.getItemAsync(key);
     return value ? JSON.parse(value) : null;
@@ -22,7 +22,7 @@ export async function getSession(key) {
 }
 
 // Eliminar un valor
-export async function removeSession(key) {
+export async function removeSession(key: string) {
   try {
     await SecureStore.deleteItemAsync(key);
   } catch (error) {

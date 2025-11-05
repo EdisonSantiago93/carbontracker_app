@@ -4,7 +4,7 @@ import { Text, TextInput, Button, Snackbar, Portal, Modal } from "react-native-p
 import AppContainer from "../components/AppContainer";
 import { loginUser, resetUserPassword } from "../services/AuthService";
 
-export default function LoginScreen({ navigation }) {
+export default function LoginScreen({ navigation }: { navigation: any }): JSX.Element {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
@@ -16,7 +16,7 @@ export default function LoginScreen({ navigation }) {
   const [resetEmail, setResetEmail] = useState("");
   const [loadingReset, setLoadingReset] = useState(false);
 
-  const showError = (message) => setSnackbar({ visible: true, message });
+  const showError = (message: string): void => setSnackbar({ visible: true, message });
 
   const handleLogin = async () => {
     if (!email || !password) return showError("Por favor completa todos los campos.");
@@ -24,7 +24,7 @@ export default function LoginScreen({ navigation }) {
     try {
       await loginUser(email.trim(), password);
       navigation.replace("Main");
-    } catch (error) {
+    } catch (error: any) {
       showError("Error al iniciar sesión: " + error.message);
     }
     setLoading(false);
@@ -38,7 +38,7 @@ export default function LoginScreen({ navigation }) {
       showError("Correo de recuperación enviado correctamente");
       setModalVisible(false);
       setResetEmail("");
-    } catch (error) {
+    } catch (error: any) {
       showError(error.message);
     }
     setLoadingReset(false);

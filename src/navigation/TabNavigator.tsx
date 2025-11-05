@@ -47,7 +47,7 @@ function TabNavigatorContent() {
         component={HomeScreen}
         options={{
           tabBarLabel: "Inicio",
-          tabBarIcon: ({ color, focused }) => (
+          tabBarIcon: ({ color, focused }: { color: string; focused: boolean }) => (
             <MaterialIcons
               name="home"
               size={focused ? 28 : 24}
@@ -61,7 +61,7 @@ function TabNavigatorContent() {
         component={CalculadoraScreen}
         options={{
           tabBarLabel: "Calculadora",
-          tabBarIcon: ({ color, focused }) => (
+          tabBarIcon: ({ color, focused }: { color: string; focused: boolean }) => (
             <MaterialIcons
               name="calculate"
               size={focused ? 28 : 24}
@@ -75,7 +75,7 @@ function TabNavigatorContent() {
         component={ConfigScreen}
         options={{
           tabBarLabel: "Perfil",
-          tabBarIcon: ({ color, focused }) => (
+          tabBarIcon: ({ color, focused }: { color: string; focused: boolean }) => (
             <MaterialIcons
               name="settings"
               size={focused ? 28 : 24}

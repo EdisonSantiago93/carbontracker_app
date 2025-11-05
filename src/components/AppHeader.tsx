@@ -1,9 +1,13 @@
-// src/components/AppHeader.js
+// src/components/AppHeader.tsx
 import React from "react";
-import { StyleSheet, StatusBar, Platform } from "react-native";
+import { StyleSheet, StatusBar } from "react-native";
 import { Appbar, useTheme } from "react-native-paper";
 
-export default function AppHeader({ title }) {
+interface AppHeaderProps {
+  title: string;
+}
+
+export default function AppHeader({ title }: AppHeaderProps): JSX.Element {
   const { colors } = useTheme();
 
   return (
