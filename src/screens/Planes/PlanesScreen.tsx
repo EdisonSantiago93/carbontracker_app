@@ -7,9 +7,9 @@ import {
 } from "react-native";
 import { Text, Button, Chip } from "react-native-paper";
 import { collection, getDocs, query, orderBy } from "firebase/firestore";
-import { db } from "../../firebaseConfig";
+import { db } from "../../../firebaseConfig";
 import { MaterialIcons } from "@expo/vector-icons";
-import { getSession } from "../utils/session";
+import { getSession } from "../../utils/session";
 import { styles } from "./PlanesScreen.styles";
 
 export default function PlanesScreen({ navigation }) {
