@@ -2,14 +2,14 @@
 import React from "react";
 import { StatusBar } from "react-native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import SplashScreen from "../screens/SplashScreen";
-import OnboardingScreen from "../screens/OnboardingScreen";
-import PlanesScreen from "../screens/PlanesScreen";
+import SplashScreen from "../screens/Splash/SplashScreen";
+import OnboardingScreen from "../screens/Onboarding/OnboardingScreen";
+import PlanesScreen from "../screens/Planes/PlanesScreen";
 
 
-import RegisterScreen from "../screens/RegisterScreen";
-import LoginScreen from "../screens/LoginScreen";
-import ProfileScreen from "../screens/ProfileScreen";
+import RegisterScreen from "../screens/Register/RegisterScreen";
+import LoginScreen from "../screens/Login/LoginScreen";
+import ProfileScreen from "../screens/Profile/ProfileScreen";
 import TabNavigator from "./TabNavigator";
 
 const Stack = createNativeStackNavigator();

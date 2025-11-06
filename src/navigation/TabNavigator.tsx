@@ -2,9 +2,9 @@
 import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Platform } from "react-native";
-import HomeScreen from "../screens/HomeScreen";
-import CalculadoraScreen from "../screens/CalculadoraScreen";
-import ConfigScreen from "../screens/ConfigScreen";
+import HomeScreen from "../screens/Home/HomeScreen";
+import CalculadoraScreen from "../screens/Calculadora/CalculadoraScreen";
+import ConfigScreen from "../screens/Config/ConfigScreen";
 import { MaterialIcons } from "@expo/vector-icons";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 

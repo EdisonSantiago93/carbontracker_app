@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
-import { View, StyleSheet, Image } from "react-native";
-import { getSession } from "../utils/session"; // Asegúrate de tener este helper
+import { View, Image } from "react-native";
+import { getSession } from "../../utils/session"; // Asegúrate de tener este helper
+import { styles } from "./SplashScreen.styles";
 
 export default function SplashScreen({ navigation }) {
   useEffect(() => {
@@ -30,23 +31,9 @@ export default function SplashScreen({ navigation }) {
   return (
     <View style={styles.container}>
       <Image
-        source={require("../../assets/splash.png")} // tu imagen
+        source={require("../../../assets/splash.png")} // tu imagen
         style={styles.logo}
       />
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: "#65C879",
-  },
-  logo: {
-    width: 280,
-    height: 100,
-    marginBottom: 20,
-  },
-});
