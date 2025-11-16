@@ -14,7 +14,7 @@
     "expo-status-bar": "~3.0.8",
     "firebase": "^12.2.1",
     "lottie-react-native": "^7.3.4",
-    "react": "^19.1.0",
+    "react": "19.1.0",
     "react-native": "0.81.5",
     "react-native-pager-view": "^6.9.1",
     "react-native-paper": "^5.14.5",
@@ -35,7 +35,6 @@
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-react": "^7.37.5",
     "eslint-plugin-react-hooks": "^7.0.1",
-    "husky": "^9.1.7",
     "lint-staged": "^16.2.6",
     "prettier": "^3.6.2",
     "typescript": "^5.9.3"
@@ -47,10 +46,8 @@
     "ios": "expo start --ios",
     "update": "expo install --fix",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx --config .eslintrc.js",
-    "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\"",
-    "prepare": "husky"
+    "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\""
   },
-  "prepare": "husky install",
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [
       "eslint --fix",

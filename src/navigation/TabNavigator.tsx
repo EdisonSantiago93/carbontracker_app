@@ -1,7 +1,8 @@
 // src/navigation/TabNavigator.tsx
+import { MaterialIcons } from '@expo/vector-icons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons.js';
+
 import CalculadoraScreen from '@/screens/Calculadora/CalculadoraScreen.tsx';
 import ConfigScreen from '@/screens/Config/ConfigScreen.tsx';
 import HomeScreen from '@/screens/Home/HomeScreen.tsx';

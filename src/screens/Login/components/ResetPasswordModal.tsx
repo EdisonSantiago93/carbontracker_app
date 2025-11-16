@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Image, StyleSheet, View } from 'react-native';
+import { Image, KeyboardAvoidingView, Platform, ScrollView, StyleSheet, View } from 'react-native';
 import { Button, Modal, Portal, Text, TextInput } from 'react-native-paper';
 
 interface ResetPasswordModalProps {
@@ -27,7 +27,6 @@ export default function ResetPasswordModal({
     setLoadingReset(true);
     try {
       // Reemplaza con tu lógica real de reseteo de contraseña
-      // await resetUserPassword(resetEmail.trim());
       console.log(`Enviando correo de recuperación a ${resetEmail.trim()}`);
       onSuccess();
       setResetEmail('');
@@ -41,49 +40,60 @@ export default function ResetPasswordModal({
   return (
     <Portal>
       <Modal visible={visible} onDismiss={onDismiss} contentContainerStyle={styles.modalWrapper}>
-        <View style={styles.modalContainer}>
-          <Image
-            source={require('../../../../assets/carbontracker.png')}
-            style={styles.modalLogo}
-            resizeMode="contain"
-          />
-          <Text style={styles.modalTitle}>Recuperar contraseña</Text>
-          <Text style={styles.modalSubtitle}>
-            Ingresa tu correo y te enviaremos un enlace para restablecer tu contraseña
-          </Text>
-
-          <TextInput
-            label="Correo electrónico"
-            value={resetEmail}
-            onChangeText={setResetEmail}
-            autoCapitalize="none"
-            keyboardType="email-address"
-            mode="outlined"
-            style={styles.input}
-            outlineColor="#E0E0E0"
-            activeOutlineColor="#65C879"
-            left={<TextInput.Icon icon="email" color="#65C879" />}
-          />
-
-          <Button
-            mode="contained"
-            onPress={handleResetPassword}
-            loading={loadingReset}
-            style={styles.saveButton}
-            contentStyle={styles.buttonContent}
+        <KeyboardAvoidingView
+          behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+          keyboardVerticalOffset={Platform.OS === 'ios' ? 0 : 20}
+        >
+          <ScrollView
+            contentContainerStyle={{ flexGrow: 1, justifyContent: 'center' }}
+            keyboardShouldPersistTaps="handled"
+            showsVerticalScrollIndicator={false}
           >
-            Enviar correo
-          </Button>
+            <View style={styles.modalContainer}>
+                <Image
+                  source={require('../../../../assets/carbontracker.png')}
+                  style={styles.modalLogo}
+                  resizeMode="contain"
+                />
+              <Text style={styles.modalTitle}>Recuperar contraseña</Text>
+              <Text style={styles.modalSubtitle}>
+                Ingresa tu correo y te enviaremos un enlace para restablecer tu contraseña
+              </Text>
 
-          <Button
-            mode="text"
-            onPress={onDismiss}
-            style={styles.cancelButton}
-            labelStyle={styles.cancelButtonText}
-          >
-            Cancelar
-          </Button>
-        </View>
+              <TextInput
+                label="Correo electrónico"
+                value={resetEmail}
+                onChangeText={setResetEmail}
+                autoCapitalize="none"
+                keyboardType="email-address"
+                mode="outlined"
+                style={styles.input}
+                outlineColor="#E0E0E0"
+                activeOutlineColor="#65C879"
+                left={<TextInput.Icon icon="email" color="#65C879" />}
+              />
+
+              <Button
+                mode="contained"
+                onPress={handleResetPassword}
+                loading={loadingReset}
+                style={styles.saveButton}
+                contentStyle={styles.buttonContent}
+              >
+                Enviar correo
+              </Button>
+
+              <Button
+                mode="text"
+                onPress={onDismiss}
+                style={styles.cancelButton}
+                labelStyle={styles.cancelButtonText}
+              >
+                Cancelar
+              </Button>
+            </View>
+          </ScrollView>
+        </KeyboardAvoidingView>
       </Modal>
     </Portal>
   );

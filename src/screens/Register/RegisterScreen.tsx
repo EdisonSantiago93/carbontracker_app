@@ -1,16 +1,16 @@
+import { styles } from '@/screens/Register/RegisterScreen.styles.ts';
+import RegisterForm from '@/screens/Register/components/RegisterForm.tsx';
+import { registerUserWithFirestore } from '@/services/AuthService.tsx';
 import { useState } from 'react';
 import {
   Image,
   KeyboardAvoidingView,
   Platform,
-  SafeAreaView,
   ScrollView,
   View,
 } from 'react-native';
 import { Button, Snackbar, Text } from 'react-native-paper';
-import { registerUserWithFirestore } from '@/services/AuthService.tsx';
-import { styles } from '@/screens/Register/RegisterScreen.styles.ts';
-import RegisterForm from '@/screens/Register/components/RegisterForm.tsx';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 const validateForm = (formData: any) => {
   const { nombres, apellidos, cedula, correo, direccion, password, confirmPassword } = formData;

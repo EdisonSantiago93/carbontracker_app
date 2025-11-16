@@ -1,9 +1,10 @@
 import { styles } from '@/screens/Profile/ProfileScreen.styles.ts';
 import { getUserData, updateUserPassword, updateUserProfile } from '@/services/AuthService.tsx';
+import { MaterialIcons } from '@expo/vector-icons';
 import { useEffect, useState } from 'react';
 import { Alert, KeyboardAvoidingView, Platform, ScrollView, View } from 'react-native';
 import { Button, Modal, Portal, Text, TextInput } from 'react-native-paper';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons.js';
+
 const MI: any = MaterialIcons;
 
 export default function ProfileScreen() {

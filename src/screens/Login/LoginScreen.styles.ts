@@ -1,6 +1,6 @@
-import { StyleSheet } from 'react-native';
 import { globalStyles } from '@/theme/globalStyles.ts';
 import { theme } from '@/theme/theme.tsx';
+import { StyleSheet } from 'react-native';
 
 export const styles = StyleSheet.create({
   container: {
@@ -12,6 +12,12 @@ export const styles = StyleSheet.create({
     flexGrow: 1, // Añadido para que el ScrollView ocupe todo el espacio
     paddingHorizontal: 24,
     paddingVertical: 40,
+    flex: 1,
+    justifyContent: 'center',
+  },
+    scrollContent: {
+    flexGrow: 1,
+    backgroundColor: theme.colors.background,
   },
   header: {
     alignItems: 'center',

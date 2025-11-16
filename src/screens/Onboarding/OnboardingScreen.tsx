@@ -1,12 +1,13 @@
+import { styles } from '@/screens/Onboarding/OnboardingScreen.styles.ts';
+import { MaterialIcons } from '@expo/vector-icons';
 import { collection, getDocs, orderBy, query } from 'firebase/firestore';
 import { useEffect, useState } from 'react';
 import { ActivityIndicator, Image, ScrollView, View } from 'react-native';
 import PagerView from 'react-native-pager-view';
 import { Button, Text } from 'react-native-paper';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons.js';
+
 import { db } from '../../../firebaseConfig.js';
-import { styles } from '@/screens/Onboarding/OnboardingScreen.styles.ts';
 const PagerViewAny: any = PagerView;
 const MI: any = MaterialIcons;
 
@@ -139,7 +140,7 @@ export default function OnboardingScreen({ navigation }: { navigation: any }): J
                 {/* Badge del plan */}
                 {plan.recomendado && (
                   <View style={styles.badge}>
-                    <MI name="star" size={16} color="#FFD700" />
+                    <MI name="check" size={16} color="#FFD700" />
                     <Text style={styles.badgeText}>Más Popular</Text>
                   </View>
                 )}

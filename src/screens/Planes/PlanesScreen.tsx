@@ -1,11 +1,15 @@
+import { MaterialIcons } from '@expo/vector-icons';
 import { collection, getDocs, orderBy, query } from 'firebase/firestore';
 import { useEffect, useState } from 'react';
 import { ActivityIndicator, Linking, ScrollView, View } from 'react-native';
 import { Button, Chip, Text } from 'react-native-paper';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons.js';
-import { db } from '../../../firebaseConfig.js';
-import { getSession } from '@/utils/session.ts';
+
 import { styles } from '@/screens/Planes/PlanesScreen.styles.ts';
+import { obtenerParametroPorTag } from '@/services/ParametrosService.tsx';
+import type { Parametro } from '@/types/Parametro';
+import { getSession } from '@/utils/session.ts';
+import { db } from '../../../firebaseConfig.js';
+
 const MI: any = MaterialIcons;
 
 export default function PlanesScreen() {
@@ -13,6 +17,7 @@ export default function PlanesScreen() {
   const [loading, setLoading] = useState<boolean>(true);
   const [currentPlan, setCurrentPlan] = useState<any | null>(null);
   const [daysRemaining, setDaysRemaining] = useState<number>(0);
+  const [contactoPlanes, setContactoPlanes] = useState<Parametro | null>(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -44,6 +49,14 @@ export default function PlanesScreen() {
           ...doc.data(),
         }));
         setPlans(plansData);
+
+        // ============================
+        // Obtener parámetro CONTACTO_PLANES desde el Service
+        // ============================
+        const parametro = await obtenerParametroPorTag('CONTACTO_PLANES');
+        if (parametro) {
+          setContactoPlanes(parametro);
+        }
       } catch (error) {
         console.error('Error al obtener datos:', error);
       } finally {
@@ -119,8 +132,8 @@ export default function PlanesScreen() {
   };
 
   const handleContactWhatsApp = () => {
-    const phoneNumber = '593999999999'; // Reemplaza con tu número
-    const message = 'Hola, me gustaría obtener más información sobre los planes de CarbonTracker';
+    const phoneNumber = contactoPlanes.valor; 
+    const message = contactoPlanes.detalle; 
     const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
     Linking.openURL(url);
   };

@@ -1,8 +1,9 @@
-import { useState } from 'react';
+import { styles } from '@/screens/Register/components/RegisterForm.styles.ts';
+import { obtenerParametroPorTag } from '@/services/ParametrosService.tsx';
+import type { Parametro } from '@/types/Parametro';
+import { useEffect, useState } from 'react';
 import { Linking, View } from 'react-native';
 import { Button, Checkbox, Text, TextInput } from 'react-native-paper';
-import { styles } from '@/screens/Register/components/RegisterForm.styles.ts';
-
 interface RegisterFormProps {
   loading: boolean;
   onSubmit: (formData: any) => void;
@@ -23,7 +24,32 @@ export default function RegisterForm({ loading, onSubmit }: RegisterFormProps) {
   const [acceptDataPolicy, setAcceptDataPolicy] = useState(false);
   const [visiblePassword, setVisiblePassword] = useState(false);
   const [visibleConfirmPassword, setVisibleConfirmPassword] = useState(false);
+  const [datos, setDatos] = useState<Parametro | null>(null);
+  const [politicas, setPoliticas] = useState<Parametro | null>(null);
+  const [terminos, setTerminos] = useState<Parametro | null>(null);
 
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const urldatos = await obtenerParametroPorTag('URL_DATOS');
+        if (urldatos) {
+          setDatos(urldatos);
+        }
+        const urlpoliticas = await obtenerParametroPorTag('URL_POLITICAS');
+        if (urlpoliticas) {
+          setPoliticas(urlpoliticas);
+        }
+        const urlterminos = await obtenerParametroPorTag('URL_TERMINOS');
+        if (urlterminos) {
+          setTerminos(urlterminos);
+        }
+      } catch (error) {
+        console.error('Error al obtener datos:', error);
+      }
+    };
+
+    fetchData();
+  }, []);
   const handleInputChange = (name: string, value: string) => {
     setFormData({ ...formData, [name]: value });
   };
@@ -131,7 +157,7 @@ export default function RegisterForm({ loading, onSubmit }: RegisterFormProps) {
             Acepto los{' '}
             <Text
               style={styles.link}
-              onPress={() => Linking.openURL('https://carbontrackerweb.netlify.app/legal/terminos')}
+              onPress={() => Linking.openURL(terminos.valor)}
             >
               términos y condiciones
             </Text>{' '}
@@ -139,7 +165,7 @@ export default function RegisterForm({ loading, onSubmit }: RegisterFormProps) {
             <Text
               style={styles.link}
               onPress={() =>
-                Linking.openURL('https://carbontrackerweb.netlify.app/legal/politicas')
+                Linking.openURL(politicas.valor)
               }
             >
               política de privacidad
@@ -157,7 +183,7 @@ export default function RegisterForm({ loading, onSubmit }: RegisterFormProps) {
             Acepto el{' '}
             <Text
               style={styles.link}
-              onPress={() => Linking.openURL('https://carbontrackerweb.netlify.app/legal/datos')}
+              onPress={() => Linking.openURL(datos.valor)}
             >
               tratamiento de datos
             </Text>

@@ -1,16 +1,3 @@
-// Temporary module declarations for libraries without types
-declare module 'react-native-vector-icons/*' {
-  const content: any;
-  export default content;
-}
-
-declare module 'react-native-vector-icons/MaterialIcons' {
-  const MaterialIcons: any;
-  export default MaterialIcons;
-}
-
-// If other modules produce errors add them here as `declare module '...';`
-
 // Wildcard fallbacks for internal TS modules referenced by .js-less imports during NodeNext migration
 declare module '*globalStyles' {
   export const globalStyles: any;
@@ -41,11 +28,7 @@ declare module 'react-native-pager-view' {
   export default PagerView;
 }
 
-// Sometimes the package is imported as a .js subpath under NodeNext resolution
-declare module 'react-native-vector-icons/MaterialIcons.js' {
-  const MaterialIcons: any;
-  export default MaterialIcons;
-}
+
 
 // Provide minimal JSX namespace so TS recognizes JSX in files while migrating
 import type React from 'react';
