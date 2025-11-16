@@ -1,56 +1,59 @@
 // src/screens/ConfigScreen.js
-import React from "react";
-import { View, ScrollView, Image, Linking } from "react-native";
-import { Text, Button, TouchableRipple } from "react-native-paper";
-import AppContainer from "../../components/AppContainer";
-import { MaterialIcons } from "@expo/vector-icons";
-import { removeSession } from "../../utils/session";
-import { styles } from "./ConfigScreen.styles";
+import { Image, Linking, ScrollView, View } from 'react-native';
+import { Button, Text, TouchableRipple } from 'react-native-paper';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons.js';
+import AppContainer from '@/components/AppContainer.tsx';
+import { removeSession } from '@/utils/session.ts';
+import { styles } from '@/screens/Config/ConfigScreen.styles.ts';
+const MI: any = MaterialIcons;
 
 export default function ConfigScreen({ navigation }: { navigation: any }): JSX.Element {
   const handleLogout = async (): Promise<void> => {
-    await removeSession("user");
-    navigation.replace("Login");
+    await removeSession('user');
+    navigation.replace('Login');
   };
 
-  const menus: { title: string; subtitle: string; icon: any; color: string; onPress: () => void; }[] = [
+  const menus: {
+    title: string;
+    subtitle: string;
+    icon: any;
+    color: string;
+    onPress: () => void;
+  }[] = [
     {
-      title: "Mi Perfil",
-      subtitle: "Ver y editar información personal",
-      icon: "person",
-      color: "#65C879",
-      onPress: () => navigation.navigate("ProfileScreen"),
+      title: 'Mi Perfil',
+      subtitle: 'Ver y editar información personal',
+      icon: 'person',
+      color: '#65C879',
+      onPress: () => navigation.navigate('ProfileScreen'),
     },
     {
-      title: "Planes",
-      subtitle: "Conoce nuestros planes y beneficios",
-      icon: "workspace-premium",
-      color: "#FFD700",
-      onPress: () => navigation.navigate("PlanesScreen"),
+      title: 'Planes',
+      subtitle: 'Conoce nuestros planes y beneficios',
+      icon: 'workspace-premium',
+      color: '#FFD700',
+      onPress: () => navigation.navigate('PlanesScreen'),
     },
     {
-      title: "Términos y Condiciones",
-      subtitle: "Lee nuestros términos de servicio",
-      icon: "description",
-      color: "#4A90E2",
-      onPress: () =>
-        Linking.openURL("https://carbontrackerweb.netlify.app/legal/terminos"),
+      title: 'Términos y Condiciones',
+      subtitle: 'Lee nuestros términos de servicio',
+      icon: 'description',
+      color: '#4A90E2',
+      onPress: () => Linking.openURL('https://carbontrackerweb.netlify.app/legal/terminos'),
     },
     {
-      title: "Políticas de Privacidad",
-      subtitle: "Cómo protegemos tus datos",
-      icon: "security",
-      color: "#F5A623",
-      onPress: () =>
-        Linking.openURL("https://carbontrackerweb.netlify.app/legal/politicas"),
+      title: 'Políticas de Privacidad',
+      subtitle: 'Cómo protegemos tus datos',
+      icon: 'security',
+      color: '#F5A623',
+      onPress: () => Linking.openURL('https://carbontrackerweb.netlify.app/legal/politicas'),
     },
     {
-      title: "Tratamiento de Datos",
-      subtitle: "Conoce cómo usamos tu información",
-      icon: "policy",
-      color: "#9013FE",
-      onPress: () =>
-        Linking.openURL("https://carbontrackerweb.netlify.app/legal/datos"),
+      title: 'Tratamiento de Datos',
+      subtitle: 'Conoce cómo usamos tu información',
+      icon: 'policy',
+      color: '#9013FE',
+      onPress: () => Linking.openURL('https://carbontrackerweb.netlify.app/legal/datos'),
     },
   ];
 
@@ -64,14 +67,12 @@ export default function ConfigScreen({ navigation }: { navigation: any }): JSX.E
         {/* Header */}
         <View style={styles.header}>
           <Image
-            source={require("../../../assets/carbontracker.png")}
+            source={require('../../../assets/carbontracker.png')}
             style={styles.logo}
             resizeMode="contain"
           />
           <Text style={styles.welcomeText}>Configuración</Text>
-          <Text style={styles.subtitleText}>
-            Administra tu cuenta y preferencias
-          </Text>
+          <Text style={styles.subtitleText}>Administra tu cuenta y preferencias</Text>
         </View>
 
         {/* Menú de opciones */}
@@ -85,16 +86,14 @@ export default function ConfigScreen({ navigation }: { navigation: any }): JSX.E
               borderless
             >
               <View style={styles.menuContent}>
-                <View
-                  style={[styles.iconContainer, { backgroundColor: menu.color + "15" }]}
-                >
-                  <MaterialIcons name={menu.icon} size={24} color={menu.color} />
+                <View style={[styles.iconContainer, { backgroundColor: menu.color + '15' }]}>
+                  <MI name={menu.icon} size={24} color={menu.color} />
                 </View>
                 <View style={styles.menuTextContainer}>
                   <Text style={styles.menuTitle}>{menu.title}</Text>
                   <Text style={styles.menuSubtitle}>{menu.subtitle}</Text>
                 </View>
-                <MaterialIcons name="chevron-right" size={24} color="#999" />
+                <MI name="chevron-right" size={24} color="#999" />
               </View>
             </TouchableRipple>
           ))}
@@ -107,8 +106,8 @@ export default function ConfigScreen({ navigation }: { navigation: any }): JSX.E
           style={styles.logoutButton}
           contentStyle={styles.logoutButtonContent}
           labelStyle={styles.logoutButtonLabel}
-          icon={({ size, color }: { size: number; color: string; }) => (
-            <MaterialIcons name="logout" size={size} color={color} />
+          icon={({ size, color }: { size: number; color: string }) => (
+            <MI name="logout" size={size} color={color} />
           )}
         >
           Cerrar Sesión
@@ -117,9 +116,7 @@ export default function ConfigScreen({ navigation }: { navigation: any }): JSX.E
         {/* Footer con versión */}
         <View style={styles.footer}>
           <Text style={styles.versionText}>CarbonTracker v1.0.0</Text>
-          <Text style={styles.copyrightText}>
-            © 2025 Todos los derechos reservados
-          </Text>
+          <Text style={styles.copyrightText}>© 2025 Todos los derechos reservados</Text>
         </View>
       </ScrollView>
     </AppContainer>

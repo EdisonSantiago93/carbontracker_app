@@ -1,8 +1,8 @@
 // src/components/AppContainer.tsx
-import React from "react";
-import { View, KeyboardAvoidingView, ScrollView, Platform, StyleSheet } from "react-native";
-import { useTheme } from "react-native-paper";
-import AppHeader from "./AppHeader";
+import React from 'react';
+import { KeyboardAvoidingView, Platform, ScrollView, StyleSheet, View } from 'react-native';
+import { useTheme } from 'react-native-paper';
+import AppHeader from '@/components/AppHeader.tsx';
 
 interface AppContainerProps {
   children: React.ReactNode;
@@ -19,8 +19,8 @@ export default function AppContainer({ children, title }: AppContainerProps): JS
 
       <KeyboardAvoidingView
         style={styles.flex}
-        behavior={Platform.OS === "ios" ? "padding" : "height"}
-        keyboardVerticalOffset={Platform.OS === "ios" ? 60 : 0}
+        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+        keyboardVerticalOffset={Platform.OS === 'ios' ? 60 : 0}
       >
         <ScrollView
           contentContainerStyle={styles.scrollContainer}

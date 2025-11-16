@@ -1,6 +1,6 @@
-import { StyleSheet } from "react-native";
-import { globalStyles } from "../../theme/globalStyles";
-import { theme } from "../../theme/theme.tsx";
+import { StyleSheet } from 'react-native';
+import { globalStyles } from '@/theme/globalStyles.ts';
+import { theme } from '@/theme/theme.tsx';
 
 export const styles = StyleSheet.create({
   scrollContent: {
@@ -9,11 +9,11 @@ export const styles = StyleSheet.create({
     backgroundColor: theme.colors.background,
   },
   centered: {
-    alignItems: "center",
+    alignItems: 'center',
     paddingHorizontal: 24,
   },
   header: {
-    alignItems: "center",
+    alignItems: 'center',
     marginBottom: 32,
   },
   logo: {
@@ -26,7 +26,7 @@ export const styles = StyleSheet.create({
   },
   subtitleText: {
     ...globalStyles.subtitle,
-    textAlign: "center",
+    textAlign: 'center',
   },
   divider: {
     ...globalStyles.divider,
@@ -38,7 +38,7 @@ export const styles = StyleSheet.create({
     ...globalStyles.dividerText,
   },
   loginButton: {
-    width: "100%",
+    width: '100%',
     borderRadius: theme.roundness,
     borderColor: theme.colors.primary,
     borderWidth: 1.5,
@@ -46,9 +46,13 @@ export const styles = StyleSheet.create({
   loginButtonText: {
     color: theme.colors.primary,
     fontSize: 16,
-    fontWeight: "600",
+    fontWeight: '600',
+  },
+  // content style passed to Button.contentStyle
+  buttonContent: {
+    paddingVertical: 8,
   },
   snackbar: {
-    backgroundColor: "#333",
+    backgroundColor: '#333',
   },
 });

@@ -1,7 +1,6 @@
-import React, { useState } from "react";
-import { View, Image } from "react-native";
-import { Text, TextInput, Button, Modal, Portal } from "react-native-paper";
-import { StyleSheet } from "react-native";
+import { useState } from 'react';
+import { Image, StyleSheet, View } from 'react-native';
+import { Button, Modal, Portal, Text, TextInput } from 'react-native-paper';
 
 interface ResetPasswordModalProps {
   visible: boolean;
@@ -16,22 +15,22 @@ export default function ResetPasswordModal({
   onSuccess,
   showError,
 }: ResetPasswordModalProps) {
-  const [resetEmail, setResetEmail] = useState("");
+  const [resetEmail, setResetEmail] = useState('');
   const [loadingReset, setLoadingReset] = useState(false);
 
   const handleResetPassword = async () => {
     if (!resetEmail) {
-      showError("Ingresa tu correo para recuperar la contraseña");
+      showError('Ingresa tu correo para recuperar la contraseña');
       return;
     }
 
     setLoadingReset(true);
     try {
       // Reemplaza con tu lógica real de reseteo de contraseña
-      // await resetUserPassword(resetEmail.trim()); 
+      // await resetUserPassword(resetEmail.trim());
       console.log(`Enviando correo de recuperación a ${resetEmail.trim()}`);
       onSuccess();
-      setResetEmail("");
+      setResetEmail('');
     } catch (error: any) {
       showError(error.message);
     } finally {
@@ -41,21 +40,16 @@ export default function ResetPasswordModal({
 
   return (
     <Portal>
-      <Modal
-        visible={visible}
-        onDismiss={onDismiss}
-        contentContainerStyle={styles.modalWrapper}
-      >
+      <Modal visible={visible} onDismiss={onDismiss} contentContainerStyle={styles.modalWrapper}>
         <View style={styles.modalContainer}>
           <Image
-            source={require("../../../../assets/carbontracker.png")}
+            source={require('../../../../assets/carbontracker.png')}
             style={styles.modalLogo}
             resizeMode="contain"
           />
           <Text style={styles.modalTitle}>Recuperar contraseña</Text>
           <Text style={styles.modalSubtitle}>
-            Ingresa tu correo y te enviaremos un enlace para restablecer tu
-            contraseña
+            Ingresa tu correo y te enviaremos un enlace para restablecer tu contraseña
           </Text>
 
           <TextInput
@@ -98,13 +92,13 @@ export default function ResetPasswordModal({
 const styles = StyleSheet.create({
   modalWrapper: {
     marginHorizontal: 24,
-    backgroundColor: "white",
+    backgroundColor: 'white',
     borderRadius: 16,
     padding: 24,
     elevation: 5,
   },
   modalContainer: {
-    alignItems: "center",
+    alignItems: 'center',
   },
   modalLogo: {
     width: 100,
@@ -113,36 +107,36 @@ const styles = StyleSheet.create({
   },
   modalTitle: {
     fontSize: 22,
-    fontWeight: "700",
+    fontWeight: '700',
     marginBottom: 8,
-    textAlign: "center",
-    color: "#333",
+    textAlign: 'center',
+    color: '#333',
   },
   modalSubtitle: {
     fontSize: 14,
-    color: "#666",
-    textAlign: "center",
+    color: '#666',
+    textAlign: 'center',
     marginBottom: 24,
     lineHeight: 20,
   },
   input: {
-    width: "100%",
+    width: '100%',
     marginBottom: 16,
-    backgroundColor: "#fff",
+    backgroundColor: '#fff',
   },
   saveButton: {
-    backgroundColor: "#65C879",
+    backgroundColor: '#65C879',
     marginTop: 16,
-    width: "100%",
+    width: '100%',
     borderRadius: 8,
     elevation: 2,
   },
   cancelButton: {
     marginTop: 8,
-    width: "100%",
+    width: '100%',
   },
   cancelButtonText: {
-    color: "#999",
+    color: '#999',
     fontSize: 15,
   },
   buttonContent: {

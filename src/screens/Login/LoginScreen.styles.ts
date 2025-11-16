@@ -1,6 +1,6 @@
-import { StyleSheet } from "react-native";
-import { globalStyles } from "../../theme/globalStyles";
-import { theme } from "../../theme/theme.tsx";
+import { StyleSheet } from 'react-native';
+import { globalStyles } from '@/theme/globalStyles.ts';
+import { theme } from '@/theme/theme.tsx';
 
 export const styles = StyleSheet.create({
   container: {
@@ -14,7 +14,7 @@ export const styles = StyleSheet.create({
     paddingVertical: 40,
   },
   header: {
-    alignItems: "center",
+    alignItems: 'center',
     marginBottom: 40,
   },
   logo: {
@@ -29,20 +29,20 @@ export const styles = StyleSheet.create({
     ...globalStyles.subtitle,
   },
   formContainer: {
-    width: "100%",
+    width: '100%',
   },
   input: {
     ...globalStyles.input,
   },
   forgotButton: {
-    alignSelf: "flex-end",
+    alignSelf: 'flex-end',
     marginTop: -8,
     marginBottom: 8,
   },
   forgotButtonText: {
     color: theme.colors.primary,
     fontSize: 14,
-    fontWeight: "600",
+    fontWeight: '600',
   },
   button: {
     ...globalStyles.button,
@@ -63,7 +63,7 @@ export const styles = StyleSheet.create({
     ...globalStyles.dividerText,
   },
   registerButton: {
-    width: "100%",
+    width: '100%',
     borderRadius: theme.roundness,
     borderColor: theme.colors.primary,
     borderWidth: 1.5,
@@ -71,9 +71,9 @@ export const styles = StyleSheet.create({
   registerButtonText: {
     color: theme.colors.primary,
     fontSize: 16,
-    fontWeight: "600",
+    fontWeight: '600',
   },
   snackbar: {
-    backgroundColor: "#333",
+    backgroundColor: '#333',
   },
 });

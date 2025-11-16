@@ -51,3 +51,24 @@ Join our community of developers creating universal apps.
 
 - [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
 - [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+
+## Developer setup (local)
+
+If you work on this repository locally, follow these steps:
+
+1. Copy `.env.example` to `.env` and fill your Firebase keys (or use `app.config.js` / Expo secrets).
+2. Install node modules (if you encounter peer-dependency errors, use legacy resolution):
+
+```powershell
+npm install --legacy-peer-deps
+```
+
+3. Start the project:
+
+```powershell
+npm run start
+```
+
+Notes:
+- Move secret keys out of the repository for production. Use secret managers or CI environment variables.
+- We updated `react` to ^19.2.0 to resolve peer dependency conflicts; if you still see errors try `npm cache clean --force` and reinstall.

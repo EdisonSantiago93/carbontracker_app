@@ -1,9 +1,15 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { View } from 'react-native';
-import { TextInput, Button } from 'react-native-paper';
-import { styles } from './LoginForm.styles';
+import { Button, TextInput } from 'react-native-paper';
+import { styles } from '@/screens/Login/components/LoginForm.styles.ts';
 
-export default function LoginForm({ loading, onSubmit }) {
+export default function LoginForm({
+  loading,
+  onSubmit,
+}: {
+  loading: boolean;
+  onSubmit: (data: any) => void;
+}) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [visiblePassword, setVisiblePassword] = useState(false);

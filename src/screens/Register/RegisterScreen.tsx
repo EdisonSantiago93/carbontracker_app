@@ -1,27 +1,19 @@
-import React, { useState } from "react";
+import { useState } from 'react';
 import {
-  View,
-  ScrollView,
+  Image,
   KeyboardAvoidingView,
   Platform,
-  Image,
   SafeAreaView,
-} from "react-native";
-import { Text, Button, Snackbar } from "react-native-paper";
-import { registerUserWithFirestore } from "../../services/AuthService";
-import { styles } from "./RegisterScreen.styles";
-import RegisterForm from "./components/RegisterForm";
+  ScrollView,
+  View,
+} from 'react-native';
+import { Button, Snackbar, Text } from 'react-native-paper';
+import { registerUserWithFirestore } from '@/services/AuthService.tsx';
+import { styles } from '@/screens/Register/RegisterScreen.styles.ts';
+import RegisterForm from '@/screens/Register/components/RegisterForm.tsx';
 
 const validateForm = (formData: any) => {
-  const {
-    nombres,
-    apellidos,
-    cedula,
-    correo,
-    direccion,
-    password,
-    confirmPassword,
-  } = formData;
+  const { nombres, apellidos, cedula, correo, direccion, password, confirmPassword } = formData;
 
   if (
     !nombres.trim() ||
@@ -32,25 +24,25 @@ const validateForm = (formData: any) => {
     !password.trim() ||
     !confirmPassword.trim()
   ) {
-    return "Completa todos los campos";
+    return 'Completa todos los campos';
   }
 
   if (password !== confirmPassword) {
-    return "Las contraseñas no coinciden";
+    return 'Las contraseñas no coinciden';
   }
 
   if (password.length < 6) {
-    return "La contraseña debe tener al menos 6 caracteres";
+    return 'La contraseña debe tener al menos 6 caracteres';
   }
 
   return null;
 };
 
-export default function RegisterScreen({ navigation }) {
+export default function RegisterScreen({ navigation }: { navigation: any }) {
   const [loading, setLoading] = useState(false);
-  const [snackbar, setSnackbar] = useState({ visible: false, message: "" });
+  const [snackbar, setSnackbar] = useState({ visible: false, message: '' });
 
-  const showError = (message) => setSnackbar({ visible: true, message });
+  const showError = (message: string) => setSnackbar({ visible: true, message });
 
   const handleRegister = async (formData: any) => {
     const errorMessage = validateForm(formData);
@@ -64,11 +56,16 @@ export default function RegisterScreen({ navigation }) {
       await registerUserWithFirestore({
         ...formData,
         correo: formData.correo.trim(),
-        rol: "usuario",
+        rol: 'usuario',
       });
-      navigation.replace("Login");
-    } catch (error) {
-      showError(error.message);
+      navigation.replace('Login');
+    } catch (error: unknown) {
+      // normalize unknown error to string message
+      if (error instanceof Error) {
+        showError(error.message);
+      } else {
+        showError(String(error));
+      }
     } finally {
       setLoading(false);
     }
@@ -78,7 +75,7 @@ export default function RegisterScreen({ navigation }) {
     <SafeAreaView style={{ flex: 1, backgroundColor: styles.scrollContent.backgroundColor }}>
       <KeyboardAvoidingView
         style={{ flex: 1 }}
-        behavior={Platform.OS === "ios" ? "padding" : undefined}
+        behavior={Platform.OS === 'ios' ? 'padding' : undefined}
       >
         <ScrollView
           contentContainerStyle={styles.scrollContent}
@@ -88,14 +85,12 @@ export default function RegisterScreen({ navigation }) {
           <View style={styles.centered}>
             <View style={styles.header}>
               <Image
-                source={require("../../../assets/logo.png")}
+                source={require('../../../assets/logo.png')}
                 style={styles.logo}
                 resizeMode="contain"
               />
               <Text style={styles.welcomeText}>Crear Cuenta</Text>
-              <Text style={styles.subtitleText}>
-                Completa tus datos para registrarte
-              </Text>
+              <Text style={styles.subtitleText}>Completa tus datos para registrarte</Text>
             </View>
 
             <RegisterForm loading={loading} onSubmit={handleRegister} />
@@ -120,7 +115,7 @@ export default function RegisterScreen({ navigation }) {
 
           <Snackbar
             visible={snackbar.visible}
-            onDismiss={() => setSnackbar({ visible: false, message: "" })}
+            onDismiss={() => setSnackbar({ visible: false, message: '' })}
             duration={3000}
             style={styles.snackbar}
           >

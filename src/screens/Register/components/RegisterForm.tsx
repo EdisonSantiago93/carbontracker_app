@@ -1,7 +1,7 @@
-import React, { useState } from "react";
-import { View, Linking } from "react-native";
-import { Text, TextInput, Button, Checkbox } from "react-native-paper";
-import { styles } from "./RegisterForm.styles";
+import { useState } from 'react';
+import { Linking, View } from 'react-native';
+import { Button, Checkbox, Text, TextInput } from 'react-native-paper';
+import { styles } from '@/screens/Register/components/RegisterForm.styles.ts';
 
 interface RegisterFormProps {
   loading: boolean;
@@ -10,13 +10,13 @@ interface RegisterFormProps {
 
 export default function RegisterForm({ loading, onSubmit }: RegisterFormProps) {
   const [formData, setFormData] = useState({
-    nombres: "",
-    apellidos: "",
-    cedula: "",
-    correo: "",
-    direccion: "",
-    password: "",
-    confirmPassword: "",
+    nombres: '',
+    apellidos: '',
+    cedula: '',
+    correo: '',
+    direccion: '',
+    password: '',
+    confirmPassword: '',
   });
 
   const [acceptTerms, setAcceptTerms] = useState(false);
@@ -33,7 +33,7 @@ export default function RegisterForm({ loading, onSubmit }: RegisterFormProps) {
       <TextInput
         label="Nombres"
         value={formData.nombres}
-        onChangeText={(text) => handleInputChange("nombres", text)}
+        onChangeText={(text) => handleInputChange('nombres', text)}
         style={styles.input}
         mode="outlined"
         outlineColor="#E0E0E0"
@@ -43,7 +43,7 @@ export default function RegisterForm({ loading, onSubmit }: RegisterFormProps) {
       <TextInput
         label="Apellidos"
         value={formData.apellidos}
-        onChangeText={(text) => handleInputChange("apellidos", text)}
+        onChangeText={(text) => handleInputChange('apellidos', text)}
         style={styles.input}
         mode="outlined"
         outlineColor="#E0E0E0"
@@ -53,7 +53,7 @@ export default function RegisterForm({ loading, onSubmit }: RegisterFormProps) {
       <TextInput
         label="Cédula"
         value={formData.cedula}
-        onChangeText={(text) => handleInputChange("cedula", text)}
+        onChangeText={(text) => handleInputChange('cedula', text)}
         keyboardType="numeric"
         style={styles.input}
         mode="outlined"
@@ -64,7 +64,7 @@ export default function RegisterForm({ loading, onSubmit }: RegisterFormProps) {
       <TextInput
         label="Correo electrónico"
         value={formData.correo}
-        onChangeText={(text) => handleInputChange("correo", text)}
+        onChangeText={(text) => handleInputChange('correo', text)}
         autoCapitalize="none"
         keyboardType="email-address"
         style={styles.input}
@@ -76,7 +76,7 @@ export default function RegisterForm({ loading, onSubmit }: RegisterFormProps) {
       <TextInput
         label="Dirección"
         value={formData.direccion}
-        onChangeText={(text) => handleInputChange("direccion", text)}
+        onChangeText={(text) => handleInputChange('direccion', text)}
         style={styles.input}
         mode="outlined"
         outlineColor="#E0E0E0"
@@ -86,7 +86,7 @@ export default function RegisterForm({ loading, onSubmit }: RegisterFormProps) {
       <TextInput
         label="Contraseña"
         value={formData.password}
-        onChangeText={(text) => handleInputChange("password", text)}
+        onChangeText={(text) => handleInputChange('password', text)}
         secureTextEntry={!visiblePassword}
         style={styles.input}
         mode="outlined"
@@ -95,7 +95,7 @@ export default function RegisterForm({ loading, onSubmit }: RegisterFormProps) {
         left={<TextInput.Icon icon="lock" color="#65C879" />}
         right={
           <TextInput.Icon
-            icon={visiblePassword ? "eye-off" : "eye"}
+            icon={visiblePassword ? 'eye-off' : 'eye'}
             onPress={() => setVisiblePassword((v) => !v)}
             color="#999"
           />
@@ -104,7 +104,7 @@ export default function RegisterForm({ loading, onSubmit }: RegisterFormProps) {
       <TextInput
         label="Confirmar Contraseña"
         value={formData.confirmPassword}
-        onChangeText={(text) => handleInputChange("confirmPassword", text)}
+        onChangeText={(text) => handleInputChange('confirmPassword', text)}
         secureTextEntry={!visibleConfirmPassword}
         style={styles.input}
         mode="outlined"
@@ -113,7 +113,7 @@ export default function RegisterForm({ loading, onSubmit }: RegisterFormProps) {
         left={<TextInput.Icon icon="lock-check" color="#65C879" />}
         right={
           <TextInput.Icon
-            icon={visibleConfirmPassword ? "eye-off" : "eye"}
+            icon={visibleConfirmPassword ? 'eye-off' : 'eye'}
             onPress={() => setVisibleConfirmPassword((v) => !v)}
             color="#999"
           />
@@ -123,29 +123,23 @@ export default function RegisterForm({ loading, onSubmit }: RegisterFormProps) {
       <View style={styles.termsSection}>
         <View style={styles.checkboxRow}>
           <Checkbox.Android
-            status={acceptTerms ? "checked" : "unchecked"}
+            status={acceptTerms ? 'checked' : 'unchecked'}
             onPress={() => setAcceptTerms(!acceptTerms)}
             color="#65C879"
           />
           <Text style={styles.checkboxText}>
-            Acepto los{" "}
+            Acepto los{' '}
             <Text
               style={styles.link}
-              onPress={() =>
-                Linking.openURL(
-                  "https://carbontrackerweb.netlify.app/legal/terminos"
-                )
-              }
+              onPress={() => Linking.openURL('https://carbontrackerweb.netlify.app/legal/terminos')}
             >
               términos y condiciones
-            </Text>{" "}
-            y la{" "}
+            </Text>{' '}
+            y la{' '}
             <Text
               style={styles.link}
               onPress={() =>
-                Linking.openURL(
-                  "https://carbontrackerweb.netlify.app/legal/politicas"
-                )
+                Linking.openURL('https://carbontrackerweb.netlify.app/legal/politicas')
               }
             >
               política de privacidad
@@ -155,19 +149,15 @@ export default function RegisterForm({ loading, onSubmit }: RegisterFormProps) {
 
         <View style={styles.checkboxRow}>
           <Checkbox.Android
-            status={acceptDataPolicy ? "checked" : "unchecked"}
+            status={acceptDataPolicy ? 'checked' : 'unchecked'}
             onPress={() => setAcceptDataPolicy(!acceptDataPolicy)}
             color="#65C879"
           />
           <Text style={styles.checkboxText}>
-            Acepto el{" "}
+            Acepto el{' '}
             <Text
               style={styles.link}
-              onPress={() =>
-                Linking.openURL(
-                  "https://carbontrackerweb.netlify.app/legal/datos"
-                )
-              }
+              onPress={() => Linking.openURL('https://carbontrackerweb.netlify.app/legal/datos')}
             >
               tratamiento de datos
             </Text>
@@ -180,10 +170,7 @@ export default function RegisterForm({ loading, onSubmit }: RegisterFormProps) {
         onPress={() => onSubmit(formData)}
         loading={loading}
         disabled={!acceptTerms || !acceptDataPolicy || loading}
-        style={[
-          styles.button,
-          (!acceptTerms || !acceptDataPolicy) && styles.buttonDisabled,
-        ]}
+        style={[styles.button, (!acceptTerms || !acceptDataPolicy) && styles.buttonDisabled]}
         contentStyle={styles.buttonContent}
         labelStyle={styles.buttonLabel}
       >

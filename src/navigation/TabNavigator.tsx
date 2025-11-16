@@ -1,12 +1,11 @@
-// src/navigation/TabNavigator.js
-import React from "react";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { Platform } from "react-native";
-import HomeScreen from "../screens/Home/HomeScreen";
-import CalculadoraScreen from "../screens/Calculadora/CalculadoraScreen";
-import ConfigScreen from "../screens/Config/ConfigScreen";
-import { MaterialIcons } from "@expo/vector-icons";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
+// src/navigation/TabNavigator.tsx
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons.js';
+import CalculadoraScreen from '@/screens/Calculadora/CalculadoraScreen.tsx';
+import ConfigScreen from '@/screens/Config/ConfigScreen.tsx';
+import HomeScreen from '@/screens/Home/HomeScreen.tsx';
+const MI: any = MaterialIcons;
 
 const Tab = createBottomTabNavigator();
 
@@ -17,24 +16,24 @@ function TabNavigatorContent() {
     <Tab.Navigator
       screenOptions={{
         headerShown: false,
-        tabBarActiveTintColor: "#65C879",
-        tabBarInactiveTintColor: "#999",
+        tabBarActiveTintColor: '#65C879',
+        tabBarInactiveTintColor: '#999',
         tabBarStyle: {
-          backgroundColor: "#fff",
+          backgroundColor: '#fff',
           borderTopWidth: 1,
-          borderTopColor: "#E0E0E0",
+          borderTopColor: '#E0E0E0',
           height: 60 + insets.bottom,
           paddingBottom: insets.bottom > 0 ? insets.bottom : 8,
           paddingTop: 8,
           elevation: 8,
-          shadowColor: "#000",
+          shadowColor: '#000',
           shadowOffset: { width: 0, height: -2 },
           shadowOpacity: 0.1,
           shadowRadius: 4,
         },
         tabBarLabelStyle: {
           fontSize: 12,
-          fontWeight: "600",
+          fontWeight: '600',
           marginBottom: 4,
         },
         tabBarIconStyle: {
@@ -46,13 +45,9 @@ function TabNavigatorContent() {
         name="Home"
         component={HomeScreen}
         options={{
-          tabBarLabel: "Inicio",
+          tabBarLabel: 'Inicio',
           tabBarIcon: ({ color, focused }: { color: string; focused: boolean }) => (
-            <MaterialIcons
-              name="home"
-              size={focused ? 28 : 24}
-              color={color}
-            />
+            <MI name="home" size={focused ? 28 : 24} color={color} />
           ),
         }}
       />
@@ -60,13 +55,9 @@ function TabNavigatorContent() {
         name="Calculadora"
         component={CalculadoraScreen}
         options={{
-          tabBarLabel: "Calculadora",
+          tabBarLabel: 'Calculadora',
           tabBarIcon: ({ color, focused }: { color: string; focused: boolean }) => (
-            <MaterialIcons
-              name="calculate"
-              size={focused ? 28 : 24}
-              color={color}
-            />
+            <MI name="calculate" size={focused ? 28 : 24} color={color} />
           ),
         }}
       />
@@ -74,13 +65,9 @@ function TabNavigatorContent() {
         name="Configuración"
         component={ConfigScreen}
         options={{
-          tabBarLabel: "Perfil",
+          tabBarLabel: 'Perfil',
           tabBarIcon: ({ color, focused }: { color: string; focused: boolean }) => (
-            <MaterialIcons
-              name="settings"
-              size={focused ? 28 : 24}
-              color={color}
-            />
+            <MI name="settings" size={focused ? 28 : 24} color={color} />
           ),
         }}
       />

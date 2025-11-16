@@ -1,31 +1,28 @@
 // src/screens/CalculadoraScreen.js
-import React, { useState, useEffect } from "react";
-import { View, Dimensions, ActivityIndicator } from "react-native";
-import { useTheme } from "react-native-paper";
-import { WebView } from "react-native-webview";
-import AppContainer from "../../components/AppContainer";
-import { getSession } from "../../utils/session";
-import { styles } from "./CalculadoraScreen.styles";
-
-const screenWidth = Dimensions.get("window").width - 40;
+import { useEffect, useState } from 'react';
+import { ActivityIndicator, View } from 'react-native';
+import { useTheme } from 'react-native-paper';
+import { WebView } from 'react-native-webview';
+import AppContainer from '@/components/AppContainer.tsx';
+import { getSession } from '@/utils/session.ts';
+import { styles } from '@/screens/Calculadora/CalculadoraScreen.styles.ts';
 
 export default function CalculadoraScreen(): JSX.Element {
   const { colors } = useTheme();
-  const [user, setUser] = useState<any | null>(null);
+  // user state isn't needed here; we only use webUrl built from stored user id
   const [loading, setLoading] = useState(true);
-  const [webUrl, setWebUrl] = useState("");
+  const [webUrl, setWebUrl] = useState('');
 
   useEffect(() => {
     const loadUser = async () => {
       try {
-        const storedUser = await getSession("user");
-        console.error("Usuario cargado:", storedUser);
+        const storedUser = await getSession('user');
+        console.error('Usuario cargado:', storedUser);
         if (storedUser) {
-          setUser(storedUser);
           setWebUrl(`https://carbontrackerweb.netlify.app/calculadora/${storedUser.id}`);
         }
       } catch (error) {
-        console.error("Error cargando usuario:", error);
+        console.error('Error cargando usuario:', error);
       } finally {
         setLoading(false);
       }

@@ -1,32 +1,22 @@
-import React, { useState, useEffect } from "react";
-import {
-  View,
-  Image,
-  ScrollView,
-  KeyboardAvoidingView,
-  Platform,
-  Dimensions,
-} from "react-native";
-import { Text, TextInput, Button, Portal, Modal, Divider } from "react-native-paper";
-import {
-  getUserData,
-  updateUserProfile,
-  updateUserPassword,
-} from "../../services/AuthService";
-import { MaterialIcons } from "@expo/vector-icons";
-import { styles } from "./ProfileScreen.styles";
+import { styles } from '@/screens/Profile/ProfileScreen.styles.ts';
+import { getUserData, updateUserPassword, updateUserProfile } from '@/services/AuthService.tsx';
+import { useEffect, useState } from 'react';
+import { Alert, KeyboardAvoidingView, Platform, ScrollView, View } from 'react-native';
+import { Button, Modal, Portal, Text, TextInput } from 'react-native-paper';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons.js';
+const MI: any = MaterialIcons;
 
 export default function ProfileScreen() {
-  const [nombres, setNombres] = useState("");
-  const [apellidos, setApellidos] = useState("");
-  const [correo, setCorreo] = useState("");
-  const [direccion, setDireccion] = useState("");
+  const [nombres, setNombres] = useState('');
+  const [apellidos, setApellidos] = useState('');
+  const [correo, setCorreo] = useState('');
+  const [direccion, setDireccion] = useState('');
   const [loadingProfile, setLoadingProfile] = useState(false);
 
   const [modalVisible, setModalVisible] = useState(false);
-  const [currentPassword, setCurrentPassword] = useState("");
-  const [newPassword, setNewPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
+  const [currentPassword, setCurrentPassword] = useState('');
+  const [newPassword, setNewPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
   const [loadingPassword, setLoadingPassword] = useState(false);
 
   const [showCurrent, setShowCurrent] = useState(false);
@@ -38,10 +28,10 @@ export default function ProfileScreen() {
       try {
         const userData = await getUserData();
         if (userData) {
-          setNombres(userData.nombres || "");
-          setApellidos(userData.apellidos || "");
-          setCorreo(userData.correo || "");
-          setDireccion(userData.direccion || "");
+          setNombres(userData.nombres || '');
+          setApellidos(userData.apellidos || '');
+          setCorreo(userData.correo || '');
+          setDireccion(userData.direccion || '');
         }
       } catch (error) {
         console.log(error);
@@ -55,43 +45,41 @@ export default function ProfileScreen() {
     setLoadingProfile(true);
     try {
       await updateUserProfile({ nombres, apellidos, direccion });
-      alert("Perfil actualizado correctamente");
+      Alert.alert('Perfil', 'Perfil actualizado correctamente');
     } catch (error) {
-      alert("Error al actualizar perfil");
+      console.error(error);
+      Alert.alert('Error', 'Error al actualizar perfil');
     }
     setLoadingProfile(false);
   };
 
   const handleUpdatePassword = async () => {
     if (!currentPassword || !newPassword || newPassword !== confirmPassword) {
-      return alert("Verifica los campos de contraseña");
+      return Alert.alert('Validación', 'Verifica los campos de contraseña');
     }
     setLoadingPassword(true);
     try {
       await updateUserPassword(currentPassword, newPassword);
-      alert("Contraseña actualizada correctamente");
+      Alert.alert('Contraseña', 'Contraseña actualizada correctamente');
       setModalVisible(false);
-      setCurrentPassword("");
-      setNewPassword("");
-      setConfirmPassword("");
+      setCurrentPassword('');
+      setNewPassword('');
+      setConfirmPassword('');
       setShowCurrent(false);
       setShowNew(false);
       setShowConfirm(false);
     } catch (error) {
-      alert(error.message);
+      Alert.alert('Error', (error as any)?.message || 'Ocurrió un error');
     }
     setLoadingPassword(false);
   };
 
   return (
-    <ScrollView 
-      contentContainerStyle={styles.container}
-      showsVerticalScrollIndicator={false}
-    >
+    <ScrollView contentContainerStyle={styles.container} showsVerticalScrollIndicator={false}>
       {/* Header */}
       <View style={styles.header}>
         <View style={styles.avatarContainer}>
-          <MaterialIcons name="account-circle" size={80} color="#65C879" />
+          <MI name="account-circle" size={80} color="#65C879" />
         </View>
         <Text style={styles.welcomeText}>Mi Perfil</Text>
         <Text style={styles.subtitleText}>Administra tu información personal</Text>
@@ -100,7 +88,7 @@ export default function ProfileScreen() {
       {/* Sección de Información Personal */}
       <View style={styles.section}>
         <View style={styles.sectionHeader}>
-          <MaterialIcons name="person" size={20} color="#65C879" />
+          <MI name="person" size={20} color="#65C879" />
           <Text style={styles.sectionTitle}>Información Personal</Text>
         </View>
 
@@ -139,7 +127,7 @@ export default function ProfileScreen() {
       {/* Sección de Cuenta */}
       <View style={styles.section}>
         <View style={styles.sectionHeader}>
-          <MaterialIcons name="email" size={20} color="#65C879" />
+          <MI name="email" size={20} color="#65C879" />
           <Text style={styles.sectionTitle}>Información de Cuenta</Text>
         </View>
 
@@ -153,9 +141,7 @@ export default function ProfileScreen() {
           activeOutlineColor="#65C879"
           left={<TextInput.Icon icon="email" color="#999" />}
         />
-        <Text style={styles.helperText}>
-          El correo no puede ser modificado
-        </Text>
+        <Text style={styles.helperText}>El correo no puede ser modificado</Text>
       </View>
 
       {/* Botones de acción */}
@@ -192,7 +178,7 @@ export default function ProfileScreen() {
           contentContainerStyle={styles.modalWrapper}
         >
           <KeyboardAvoidingView
-            behavior={Platform.OS === "ios" ? "padding" : undefined}
+            behavior={Platform.OS === 'ios' ? 'padding' : undefined}
             style={styles.keyboardView}
           >
             <View style={styles.modalContainer}>
@@ -203,7 +189,7 @@ export default function ProfileScreen() {
               >
                 <View style={styles.modalHeader}>
                   <View style={styles.modalIconContainer}>
-                    <MaterialIcons name="lock" size={32} color="#65C879" />
+                    <MI name="lock" size={32} color="#65C879" />
                   </View>
                   <Text style={styles.modalTitle}>Cambiar Contraseña</Text>
                   <Text style={styles.modalSubtitle}>
@@ -223,7 +209,7 @@ export default function ProfileScreen() {
                   left={<TextInput.Icon icon="lock" color="#65C879" />}
                   right={
                     <TextInput.Icon
-                      icon={showCurrent ? "eye-off" : "eye"}
+                      icon={showCurrent ? 'eye-off' : 'eye'}
                       onPress={() => setShowCurrent(!showCurrent)}
                       color="#999"
                     />
@@ -242,7 +228,7 @@ export default function ProfileScreen() {
                   left={<TextInput.Icon icon="lock-plus" color="#65C879" />}
                   right={
                     <TextInput.Icon
-                      icon={showNew ? "eye-off" : "eye"}
+                      icon={showNew ? 'eye-off' : 'eye'}
                       onPress={() => setShowNew(!showNew)}
                       color="#999"
                     />
@@ -261,7 +247,7 @@ export default function ProfileScreen() {
                   left={<TextInput.Icon icon="lock-check" color="#65C879" />}
                   right={
                     <TextInput.Icon
-                      icon={showConfirm ? "eye-off" : "eye"}
+                      icon={showConfirm ? 'eye-off' : 'eye'}
                       onPress={() => setShowConfirm(!showConfirm)}
                       color="#999"
                     />
@@ -282,9 +268,9 @@ export default function ProfileScreen() {
                   mode="text"
                   onPress={() => {
                     setModalVisible(false);
-                    setCurrentPassword("");
-                    setNewPassword("");
-                    setConfirmPassword("");
+                    setCurrentPassword('');
+                    setNewPassword('');
+                    setConfirmPassword('');
                     setShowCurrent(false);
                     setShowNew(false);
                     setShowConfirm(false);

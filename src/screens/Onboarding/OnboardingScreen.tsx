@@ -1,20 +1,16 @@
-import React, { useState, useEffect } from "react";
-import {
-  View,
-  Image,
-  Dimensions,
-  ActivityIndicator,
-  ScrollView,
-} from "react-native";
-import PagerView from "react-native-pager-view";
-import { Text, Button } from "react-native-paper";
-import { collection, getDocs, query, orderBy } from "firebase/firestore";
-import { db } from "../../../firebaseConfig";
-import { MaterialIcons } from "@expo/vector-icons";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { styles } from "./OnboardingScreen.styles";
+import { collection, getDocs, orderBy, query } from 'firebase/firestore';
+import { useEffect, useState } from 'react';
+import { ActivityIndicator, Image, ScrollView, View } from 'react-native';
+import PagerView from 'react-native-pager-view';
+import { Button, Text } from 'react-native-paper';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons.js';
+import { db } from '../../../firebaseConfig.js';
+import { styles } from '@/screens/Onboarding/OnboardingScreen.styles.ts';
+const PagerViewAny: any = PagerView;
+const MI: any = MaterialIcons;
 
-const { width, height } = Dimensions.get("window");
+// width/height not required here; styles use fixed sizes
 
 export default function OnboardingScreen({ navigation }: { navigation: any }): JSX.Element {
   const insets = useSafeAreaInsets();
@@ -25,7 +21,7 @@ export default function OnboardingScreen({ navigation }: { navigation: any }): J
   useEffect(() => {
     const fetchPlans = async () => {
       try {
-        const plansQuery = query(collection(db, "plans"), orderBy("orden"));
+        const plansQuery = query(collection(db, 'plans'), orderBy('orden'));
         const querySnapshot = await getDocs(plansQuery);
         const plansData = querySnapshot.docs.map((doc) => ({
           id: doc.id,
@@ -33,7 +29,7 @@ export default function OnboardingScreen({ navigation }: { navigation: any }): J
         }));
         setPlans(plansData);
       } catch (error) {
-        console.error("Error al obtener los planes:", error);
+        console.error('Error al obtener los planes:', error);
       } finally {
         setLoading(false);
       }
@@ -44,63 +40,63 @@ export default function OnboardingScreen({ navigation }: { navigation: any }): J
 
   const renderCharacteristic = (item: any, index: number): JSX.Element => {
     let valorTexto = item.valor;
-    let icono = "check-circle";
-    let iconColor = "#65C879";
+    let icono = 'check-circle';
+    let iconColor = '#65C879';
 
-    if (item.tag === "persistencia-datos") {
-      if (item.valor === "sesion") {
-        valorTexto = "Se borran al cerrar";
-      } else if (item.valor === "permanente") {
-        valorTexto = "Se guardan";
+    if (item.tag === 'persistencia-datos') {
+      if (item.valor === 'sesion') {
+        valorTexto = 'Se borran al cerrar';
+      } else if (item.valor === 'permanente') {
+        valorTexto = 'Se guardan';
       }
     }
 
-    if (item.tag === "historial-datos") {
+    if (item.tag === 'historial-datos') {
       if (item.valor === 0) {
-        valorTexto = "";
-        icono = "cancel";
-        iconColor = "#E74C3C";
+        valorTexto = '';
+        icono = 'cancel';
+        iconColor = '#E74C3C';
       } else if (item.valor > 0) {
         valorTexto = `${item.valor} meses`;
       }
     }
 
-    if (item.tag === "recomendaciones" && item.valor === "ninguna") {
-      valorTexto = "";
-      icono = "cancel";
-      iconColor = "#E74C3C";
+    if (item.tag === 'recomendaciones' && item.valor === 'ninguna') {
+      valorTexto = '';
+      icono = 'cancel';
+      iconColor = '#E74C3C';
     }
 
-    if (item.tag === "reportes-corporativos" && item.valor === 0) {
-      valorTexto = "";
-      icono = "cancel";
-      iconColor = "#E74C3C";
+    if (item.tag === 'reportes-corporativos' && item.valor === 0) {
+      valorTexto = '';
+      icono = 'cancel';
+      iconColor = '#E74C3C';
     }
 
-    if (item.tag === "exportacion-datos" && item.valor === "no") {
-      valorTexto = "";
-      icono = "cancel";
-      iconColor = "#E74C3C";
+    if (item.tag === 'exportacion-datos' && item.valor === 'no') {
+      valorTexto = '';
+      icono = 'cancel';
+      iconColor = '#E74C3C';
     }
 
-    if (item.tag === "soporte" && item.valor === "ninguno") {
-      valorTexto = "";
-      icono = "cancel";
-      iconColor = "#E74C3C";
+    if (item.tag === 'soporte' && item.valor === 'ninguno') {
+      valorTexto = '';
+      icono = 'cancel';
+      iconColor = '#E74C3C';
     }
 
-    if (item.tag === "limite-usuarios" && item.valor === -1) {
-      valorTexto = "Sin límite";
+    if (item.tag === 'limite-usuarios' && item.valor === -1) {
+      valorTexto = 'Sin límite';
     }
 
     return (
       <View key={index} style={styles.characteristicItem}>
-        <View style={[styles.iconCircle, { backgroundColor: iconColor + "15" }]}>
-          <MaterialIcons name={icono} size={18} color={iconColor} />
+        <View style={[styles.iconCircle, { backgroundColor: iconColor + '15' }]}>
+          <MI name={icono} size={18} color={iconColor} />
         </View>
         <Text style={styles.characteristicText}>
           <Text style={styles.characteristicName}>{item.nombre}</Text>
-          {valorTexto ? `: ${valorTexto}` : ""}
+          {valorTexto ? `: ${valorTexto}` : ''}
         </Text>
       </View>
     );
@@ -120,20 +116,18 @@ export default function OnboardingScreen({ navigation }: { navigation: any }): J
       {/* Header */}
       <View style={styles.header}>
         <Image
-          source={require("../../../assets/splash/iconosplash.png")}
+          source={require('../../../assets/splash/iconosplash.png')}
           style={styles.headerLogo}
         />
         <Text style={styles.headerTitle}>Nuestros Planes</Text>
-        <Text style={styles.headerSubtitle}>
-          Conoce las opciones disponibles para ti
-        </Text>
+        <Text style={styles.headerSubtitle}>Conoce las opciones disponibles para ti</Text>
       </View>
 
       {/* Pager */}
-      <PagerView
+      <PagerViewAny
         style={styles.pagerView}
         initialPage={0}
-        onPageSelected={(e) => setPage(e.nativeEvent.position)}
+        onPageSelected={(e: any) => setPage(e.nativeEvent.position)}
       >
         {plans.map((plan) => (
           <View key={plan.id} style={styles.page}>
@@ -145,7 +139,7 @@ export default function OnboardingScreen({ navigation }: { navigation: any }): J
                 {/* Badge del plan */}
                 {plan.recomendado && (
                   <View style={styles.badge}>
-                    <MaterialIcons name="star" size={16} color="#FFD700" />
+                    <MI name="star" size={16} color="#FFD700" />
                     <Text style={styles.badgeText}>Más Popular</Text>
                   </View>
                 )}
@@ -157,27 +151,23 @@ export default function OnboardingScreen({ navigation }: { navigation: any }): J
                 <View style={styles.priceContainer}>
                   <Text style={styles.priceLabel}>Desde</Text>
                   <Text style={styles.price}>
-                    {plan.precio === -1 ? "A medida" : `$${plan.precio}`}
+                    {plan.precio === -1 ? 'A medida' : `$${plan.precio}`}
                   </Text>
-                  {plan.precio !== -1 && (
-                    <Text style={styles.pricePeriod}>/mes</Text>
-                  )}
+                  {plan.precio !== -1 && <Text style={styles.pricePeriod}>/mes</Text>}
                 </View>
 
                 {/* Características */}
                 <View style={styles.characteristicsContainer}>
-                  <Text style={styles.characteristicsTitle}>
-                    ¿Qué incluye?
-                  </Text>
+                  <Text style={styles.characteristicsTitle}>¿Qué incluye?</Text>
                   {plan.caracteristicas.map((item: any, index: number) =>
-                    renderCharacteristic(item, index)
+                    renderCharacteristic(item, index),
                   )}
                 </View>
               </View>
             </ScrollView>
           </View>
         ))}
-      </PagerView>
+      </PagerViewAny>
 
       {/* Indicadores */}
       <View style={styles.dotsContainer}>
@@ -191,7 +181,7 @@ export default function OnboardingScreen({ navigation }: { navigation: any }): J
               style={[
                 styles.dot,
                 {
-                  backgroundColor: i === page ? "#65C879" : "#E0E0E0",
+                  backgroundColor: i === page ? '#65C879' : '#E0E0E0',
                   width: i === page ? 24 : 8,
                 },
               ]}
@@ -205,7 +195,7 @@ export default function OnboardingScreen({ navigation }: { navigation: any }): J
         {page === plans.length - 1 ? (
           <Button
             mode="contained"
-            onPress={() => navigation.replace("Login")}
+            onPress={() => navigation.replace('Login')}
             style={styles.buttonPrimary}
             contentStyle={styles.buttonContent}
             labelStyle={styles.buttonLabel}
@@ -217,7 +207,7 @@ export default function OnboardingScreen({ navigation }: { navigation: any }): J
           <View style={styles.buttonGroup}>
             <Button
               mode="text"
-              onPress={() => navigation.replace("Login")}
+              onPress={() => navigation.replace('Login')}
               style={styles.buttonSkip}
               labelStyle={styles.buttonSkipLabel}
             >

@@ -1,15 +1,22 @@
-import React, { useState } from "react";
-import { Image, View, KeyboardAvoidingView, Platform, ScrollView, SafeAreaView } from "react-native";
-import { Text, TextInput, Button, Snackbar } from "react-native-paper";
-import { loginUser } from "../../services/AuthService";
-import { styles } from "./LoginScreen.styles"; // Importa los estilos
-import ResetPasswordModal from "./components/ResetPasswordModal"; // Importa el modal
+import { useState } from 'react';
+import {
+  Image,
+  KeyboardAvoidingView,
+  Platform,
+  SafeAreaView,
+  ScrollView,
+  View,
+} from 'react-native';
+import { Button, Snackbar, Text, TextInput } from 'react-native-paper';
+import { loginUser } from '@/services/AuthService.tsx';
+import { styles } from '@/screens/Login/LoginScreen.styles.ts'; // Importa los estilos
+import ResetPasswordModal from '@/screens/Login/components/ResetPasswordModal.tsx'; // Importa el modal
 
 export default function LoginScreen({ navigation }: { navigation: any }): JSX.Element {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
-  const [snackbar, setSnackbar] = useState({ visible: false, message: "" });
+  const [snackbar, setSnackbar] = useState({ visible: false, message: '' });
   const [visiblePassword, setVisiblePassword] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
 
@@ -17,15 +24,15 @@ export default function LoginScreen({ navigation }: { navigation: any }): JSX.El
 
   const handleLogin = async () => {
     if (!email || !password) {
-      showError("Por favor completa todos los campos.");
+      showError('Por favor completa todos los campos.');
       return;
     }
     setLoading(true);
     try {
       await loginUser(email.trim(), password);
-      navigation.replace("Main");
+      navigation.replace('Main');
     } catch (error: any) {
-      showError("Error al iniciar sesión: " + error.message);
+      showError('Error al iniciar sesión: ' + error.message);
     } finally {
       setLoading(false);
     }
@@ -35,13 +42,13 @@ export default function LoginScreen({ navigation }: { navigation: any }): JSX.El
     <SafeAreaView style={styles.container}>
       <KeyboardAvoidingView
         style={{ flex: 1 }}
-        behavior={Platform.OS === "ios" ? "padding" : undefined}
+        behavior={Platform.OS === 'ios' ? 'padding' : undefined}
       >
         <ScrollView contentContainerStyle={styles.centered} keyboardShouldPersistTaps="handled">
           {/* Header con Logo */}
           <View style={styles.header}>
             <Image
-              source={require("../../../assets/carbontracker.png")}
+              source={require('../../../assets/carbontracker.png')}
               style={styles.logo}
               resizeMode="contain"
             />
@@ -76,7 +83,7 @@ export default function LoginScreen({ navigation }: { navigation: any }): JSX.El
               left={<TextInput.Icon icon="lock" color="#65C879" />}
               right={
                 <TextInput.Icon
-                  icon={visiblePassword ? "eye-off" : "eye"}
+                  icon={visiblePassword ? 'eye-off' : 'eye'}
                   onPress={() => setVisiblePassword((v) => !v)}
                   color="#999"
                 />
@@ -113,7 +120,7 @@ export default function LoginScreen({ navigation }: { navigation: any }): JSX.El
 
             <Button
               mode="outlined"
-              onPress={() => navigation.navigate("Register")}
+              onPress={() => navigation.navigate('Register')}
               disabled={loading}
               style={styles.registerButton}
               contentStyle={styles.buttonContent}
@@ -125,7 +132,7 @@ export default function LoginScreen({ navigation }: { navigation: any }): JSX.El
 
           <Snackbar
             visible={snackbar.visible}
-            onDismiss={() => setSnackbar({ visible: false, message: "" })}
+            onDismiss={() => setSnackbar({ visible: false, message: '' })}
             duration={3000}
             style={styles.snackbar}
           >
@@ -138,7 +145,7 @@ export default function LoginScreen({ navigation }: { navigation: any }): JSX.El
           onDismiss={() => setModalVisible(false)}
           onSuccess={() => {
             setModalVisible(false);
-            showError("Correo de recuperación enviado correctamente");
+            showError('Correo de recuperación enviado correctamente');
           }}
           showError={showError}
         />
