@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "CarbonTracker",
+    "name": "carbontracker",
     "slug": "carbontracker",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -9,37 +9,25 @@
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#65C879"
+      "backgroundColor": "#ffffff"
     },
     "android": {
-      "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
-      },
-      "package": "com.yourcompany.yourapp"
+      "package": "com.carbontracker.app"
     },
     "ios": {
-      "supportsTablet": true,
-      "bundleIdentifier": "com.yourcompany.yourapp"
+      "supportsTablet": true
     },
     "web": {
-      "favicon": "./assets/favicon.png"
+      "favicon": "./assets/icon.png"
     },
     "plugins": [
       "expo-secure-store"
     ],
+    "owner": "carbontracker",
     "extra": {
       "eas": {
         "projectId": "1014357c-dafa-46a8-9e88-c911de460cfe"
-      },
-      "FIREBASE_API_KEY": "your_api_key_here",
-      "FIREBASE_AUTH_DOMAIN": "your_auth_domain_here",
-      "FIREBASE_PROJECT_ID": "your_project_id_here",
-      "FIREBASE_STORAGE_BUCKET": "your_storage_bucket_here",
-      "FIREBASE_MESSAGING_SENDER_ID": "your_messaging_sender_id_here",
-      "FIREBASE_APP_ID": "your_app_id_here",
-      "FIREBASE_MEASUREMENT_ID": "your_measurement_id_here"
-    },
-    "owner": "carbontracker"
+      }
+    }
   }
 }

@@ -46,7 +46,18 @@
     "ios": "expo start --ios",
     "update": "expo install --fix",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx --config .eslintrc.js",
-    "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\""
+    "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\"",
+   
+    "build:android": "eas build --platform android --profile production",
+    "build:ios": "eas build --platform ios --profile production",
+
+    "build:preview:android": "eas build --platform android --profile preview",
+    "build:preview:ios": "eas build --platform ios --profile preview",
+
+    "submit:android": "eas submit -p android --profile production --latest",
+    "submit:ios": "eas submit -p ios --profile production --latest",
+
+    "submit:all": "npm run submit:android && npm run submit:ios"
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [

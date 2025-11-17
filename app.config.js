@@ -1,10 +1,10 @@
-// app.config.js — load env vars from .env for local development and expose them to the bundle
 require('dotenv').config();
 
 module.exports = ({ config }) => {
   return {
     ...config,
     extra: {
+      ...config.extra, // This preserves the EAS projectId from app.json
       FIREBASE_API_KEY: process.env.FIREBASE_API_KEY,
       FIREBASE_AUTH_DOMAIN: process.env.FIREBASE_AUTH_DOMAIN,
       FIREBASE_PROJECT_ID: process.env.FIREBASE_PROJECT_ID,
